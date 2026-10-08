@@ -16,7 +16,7 @@ Ask any standard AI coding assistant a simple question, and you usually get a te
 
 **Essential Mode** is a native Claude Code output style that cuts 65% of output tokens without turning the model into a caveman. Answers fit in a single screen, start with the conclusion in line 1, use structured tables and checklists, pick one recommended fix, and strictly ban em-dashes for natural human phrasing.
 
-https://github.com/Iliesseu28/claude-essential-mode/releases/download/v1.0.0/demo.mp4
+https://github.com/user-attachments/assets/4ff3e166-3be1-42b1-af8e-d0157f8dd2d9
 
 ## Quick Install
 
@@ -48,46 +48,29 @@ Toggle it live in any session with `/output-style essential`, or revert anytime 
 
 ## Before / After
 
-<table>
-<tr>
-<td width="50%">
+### 1. React Component Debugging
 
-### 🗣️ Default Claude Code (184 tokens)
-
+**🗣️ Default Claude Code (184 tokens · 4.8s):**
 > "Certainly! I would be glad to help you resolve this issue. The reason your React component is continuously re-rendering is most likely due to creating a new object reference on every render cycle. When you pass an inline object or callback prop without memoization, React's shallow equality check sees it as a completely distinct entity, thus triggering a cascade of unnecessary renders. To remedy this situation, I recommend wrapping the calculation with useMemo, or extracting the object outside the render scope if static."
 
-</td>
-<td width="50%">
-
-### ⚡ Essential Mode (38 tokens)
-
+**⚡ Essential Mode (38 tokens · 1.6s):**
 > **Conclusion**: Your component re-renders because an inline object prop creates a new reference on each cycle.
 >
 > | Issue | Fix |
 > |---|---|
 > | Inline object prop triggers shallow diff | Wrap with `useMemo` or move outside component |
 
-</td>
-</tr>
-<tr>
-<td>
+---
 
-### 🗣️ Default Claude Code (142 tokens)
+### 2. Architectural Choice (Redis vs PostgreSQL)
 
+**🗣️ Default Claude Code (142 tokens · 3.9s):**
 > "Great question! When choosing between Redis and PostgreSQL for caching session data, there are several key factors to consider. PostgreSQL offers relational integrity and avoids running an extra server if you are already using it. On the other hand, Redis operates entirely in-memory and gives sub-millisecond latencies under high concurrency. Here is a detailed breakdown of 5 architectural trade-offs to evaluate for your stack..."
 
-</td>
-<td>
-
-### ⚡ Essential Mode (44 tokens)
-
+**⚡ Essential Mode (44 tokens · 1.4s):**
 > **Recommendation**: Use Redis.
 >
 > **Why**: In-memory key-value lookups keep session authentication under 1ms, preventing database connection pool exhaustion as user traffic spikes.
-
-</td>
-</tr>
-</table>
 
 ## Why a Native Mode Beats a Skill
 
