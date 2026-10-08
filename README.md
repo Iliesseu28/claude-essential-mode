@@ -1,42 +1,50 @@
 <p align="center">
-  <img src="docs/poster.png" alt="claude-essential-mode banner" width="100%">
+  <img src="docs/poster.png" alt="claude-essential-mode: Cut 65% of Claude Code output tokens without sounding like a caveman" width="100%">
 </p>
 
 # claude-essential-mode
 
-### Cut 65% of Claude Code output tokens without sounding like a caveman. High-school clarity, conclusion first, zero conversational fluff, zero em-dashes.
+### Cut 65% of Claude Code output tokens without sounding like a caveman. High-school clarity, conclusion first, zero fluff, zero em-dashes.
 
-<p align="center">
-  <a href="https://github.com/Iliesseu28/claude-essential-mode/stargazers"><img src="https://img.shields.io/github/stars/Iliesseu28/claude-essential-mode?style=flat&color=yellow" alt="Stars"></a>
-  <img src="https://img.shields.io/badge/Claude%20Code-output--style-D97757" alt="Claude Code style">
-  <img src="https://img.shields.io/badge/dependencies-0-3fb950" alt="Zero dependencies">
-  <img src="https://img.shields.io/badge/output%20tokens--65%25-blue" alt="Token savings">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License"></a>
-</p>
-
-<p align="center">
-  <a href="#demo-video">Demo Video</a> •
-  <a href="#before--after">Before / After</a> •
-  <a href="#why-a-mode-beats-a-skill">Why Mode Beats Skill</a> •
-  <a href="#the-6-golden-rules">The 6 Rules</a> •
-  <a href="#quick-install">Quick Install</a> •
-  <a href="#benchmarks">Benchmarks</a> •
-  <a href="#other-tools">Other Tools</a>
-</p>
-
----
+[![Release](https://img.shields.io/github/v/release/Iliesseu28/claude-essential-mode?color=D97757)](https://github.com/Iliesseu28/claude-essential-mode/releases)
+![Claude Code style](https://img.shields.io/badge/Claude%20Code-output--style-D97757)
+![dependencies](https://img.shields.io/badge/dependencies-0-3fb950)
+![tokens saved](https://img.shields.io/badge/output%20tokens--65%25-blue)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 Ask any standard AI coding assistant a simple question, and you usually get a textbook chapter: conversational throat-clearing (*"Sure! I would be delighted to help you analyze that..."*), an unsolicited restatement of your prompt, three paragraphs repeating what the CLI tools just executed, and an unranked laundry list of theoretical possibilities.
 
-Some projects solve this by turning the model into a caveman (*"Me fix bug. Token expiry check broken. Oog."*). That works for memes, but falls apart when you need to review a pull request, evaluate architecture trade-offs, or ship real code with a team.
+**Essential Mode** is a native Claude Code output style that cuts 65% of output tokens without turning the model into a caveman. Answers fit in a single screen, start with the conclusion in line 1, use structured tables and checklists, pick one recommended fix, and strictly ban em-dashes for natural human phrasing.
 
-**Essential Mode** gives you the best of both worlds:
-1. **Ruthlessly concise**: Cuts ~65% of output tokens, fits answers within a single screen view.
-2. **Crystal clear**: Plain language, conclusion in line 1, structured tables and checklists instead of walls of text.
-3. **Opinionated**: Recommends one clear solution and explains why in one line, rather than dumping a confusing menu.
-4. **Natural & Human**: Strictly bans em-dashes and AI clichés so the text never reads like an automated bot.
+https://github.com/Iliesseu28/claude-essential-mode/releases/download/v1.0.0/demo.mp4
 
----
+## Quick Install
+
+In Claude Code:
+
+```bash
+# macOS / Linux / WSL
+curl -fsSL https://raw.githubusercontent.com/Iliesseu28/claude-essential-mode/main/install.sh | bash
+
+# Windows PowerShell
+irm https://raw.githubusercontent.com/Iliesseu28/claude-essential-mode/main/install.ps1 | iex
+```
+
+That is it: the installer drops `essential.md` into your Claude Code output styles folder and activates it in `~/.claude/settings.json`.
+
+Toggle it live in any session with `/output-style essential`, or revert anytime with `/output-style default`.
+
+## What you get
+
+| | |
+|---|---|
+| **Conclusion in Line 1** | The direct answer or fix comes first. Explanations follow only if strictly necessary. |
+| **High-School Clarity** | Plain everyday words and simple grammar. Technical terms are defined immediately in parentheses. |
+| **Schematic by Default** | Tables, checklists, or ASCII diagrams replace walls of text. Never write a paragraph when a table does the job. |
+| **Single Recommendation** | Recommends one clear solution and explains why in one line, rather than dumping five unranked choices. |
+| **Zero Conversational Fluff** | No greetings, no throat-clearing, no restating your prompt, and no summarizing terminal actions already visible on screen. |
+| **No Em-Dashes** | Strictly bans em-dashes and en-dashes, eliminating the most recognizable signature of AI writing. |
+| **Full Fidelity Preserved** | Exact file paths, line numbers, git commands, and error stack traces are never truncated. |
 
 ## Before / After
 
@@ -81,16 +89,6 @@ Some projects solve this by turning the model into a caveman (*"Me fix bug. Toke
 </tr>
 </table>
 
----
-
-## Demo Video
-
-> **Watch the 30-second overview** (with neural voiceover, animated benchmarks, and live comparisons):
->
-> 🎬 [Watch / Download docs/demo.mp4](docs/demo.mp4)
-
----
-
 ## Why a Native Mode Beats a Skill
 
 Many developers attempt to control verbosity by writing a custom agent skill (`SKILL.md`). In practice, skills are the wrong architecture for output tone:
@@ -111,74 +109,11 @@ flowchart TD
     end
 ```
 
-### The Architectural Differences:
+### Key Differences:
 
 1. **Zero Input Token Tax**: Skills must be discovered, invoked, and parsed through tool calls, burning 300 to 800 input tokens per call. Essential Mode is configured directly in Claude Code's native session (`outputStyle: "Essential"`), costing **0 additional input tokens**.
 2. **Immunity to Instruction Drift**: After 10 to 15 tool executions in a single turn, transient skill instructions get pushed out of the model's immediate attention window. A native output style applies at the core system level, keeping answers terse and structured from turn 1 to turn 50.
-3. **No Intermediate Pollution**: Skills can accidentally interfere with intermediate tool arguments. An output style strictly shapes how Claude communicates with you, leaving bash commands, diffs, and commits untouched.
-
----
-
-## The 6 Golden Rules
-
-Every answer generated under Essential Mode adheres to six principles:
-
-1. **Conclusion First**: The direct answer lives in line 1. Explanations follow only if strictly necessary.
-2. **High-School Clarity**: Plain everyday words, simple grammar. If a technical term must appear, define it immediately in parentheses.
-3. **Schematic by Default**: Tables, numbered checklists, or ASCII diagrams whenever comparing choices or explaining steps. Never write a paragraph when a table does the job.
-4. **Single Recommendation**: Pick the best option and justify it in one sentence. Never dump a menu of five options unless requested.
-5. **Zero AI Boilerplate**: No greetings, no *"Certainly!"*, no restating the question, and no summarizing terminal actions already visible on screen.
-6. **No Em-Dashes**: The em-dash (`—`) and en-dash (`–`) are banned. Commas, colons, and parentheses replace them, eliminating the most recognizable signature of AI writing.
-
----
-
-## Quick Install
-
-### Option A: Automatic One-Liner
-
-**macOS / Linux / WSL:**
-```bash
-curl -fsSL https://raw.githubusercontent.com/Iliesseu28/claude-essential-mode/main/install.sh | bash
-```
-
-**Windows PowerShell:**
-```powershell
-irm https://raw.githubusercontent.com/Iliesseu28/claude-essential-mode/main/install.ps1 | iex
-```
-
-### Option B: Manual Setup for Claude Code
-
-1. Download [`styles/essential.md`](styles/essential.md) into your Claude Code output styles folder:
-   - Mac / Linux: `~/.claude/output-styles/essential.md`
-   - Windows: `C:\Users\<You>\.claude\output-styles\essential.md`
-
-2. Activate it in `~/.claude/settings.json`:
-   ```json
-   {
-     "outputStyle": "Essential"
-   }
-   ```
-
-3. Or toggle it live inside any running session:
-   ```text
-   /output-style essential
-   ```
-
----
-
-## Temporary Override
-
-Need an exhaustive, multi-page deep dive on a specific question? You do not need to uninstall the mode.
-
-Simply include one of these trigger words in your prompt:
-* *"detail"*
-* *"explain in depth"*
-* *"audit"*
-* *"elaborate"*
-
-Essential Mode temporarily suspends its length limits for that specific turn and gives you a comprehensive breakdown.
-
----
+3. **No Intermediate Tool Pollution**: Skills can accidentally interfere with intermediate tool arguments. An output style strictly shapes how Claude communicates with you, leaving bash commands, diffs, and commits untouched.
 
 ## Benchmarks
 
@@ -194,7 +129,17 @@ Measured across 50 realistic software engineering tasks (API design, debugging, 
 
 *Note: Because output tokens cost 5x more than input tokens on Claude Sonnet ($15/M vs $3/M) and Opus ($75/M vs $15/M), trimming conversational fluff delivers direct financial savings while dramatically speeding up your workflow.*
 
----
+## Temporary Override
+
+Need an exhaustive, multi-page deep dive on a specific question? You do not need to uninstall the mode.
+
+Simply include one of these trigger words in your prompt:
+* *"detail"*
+* *"explain in depth"*
+* *"audit"*
+* *"elaborate"*
+
+Essential Mode temporarily suspends its length limits for that specific turn and gives you a comprehensive breakdown.
 
 ## Other Tools
 
@@ -205,15 +150,11 @@ Essential Mode is not limited to Claude Code. You can use it across any AI codin
 * **Claude Desktop / Web**: Add to **Project Instructions** or Custom Instructions.
 * **ChatGPT / Gemini**: Paste into Custom System Instructions.
 
----
-
 ## What It Never Does
 
 * **Never truncates critical data**: Exact file paths, line numbers, terminal commands, error stack traces, and financial figures are always preserved verbatim.
 * **Never writes broken English**: It speaks concise, natural English, not caveman phrases.
 * **Never touches code files**: It only governs conversational output. Your generated code, unit tests, and commits keep the full length they require.
-
----
 
 ## License
 
